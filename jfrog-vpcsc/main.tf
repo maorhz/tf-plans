@@ -1,3 +1,6 @@
+# This HCL file (terraform plan) is unsupported and does not affiliate with any Google commercial nor open-source project, product, or service.
+# Adjust as needed and use this plan with cautious as a template or example to implement policy using gcp vpc service controls.
+
 # ------------------------
 # Provider Configuration
 # ------------------------
