@@ -66,9 +66,9 @@ resource "google_access_context_manager_access_level" "any_sa_except_hpriv_from_
   }
 }
 
-# ---------------------------------------------------------
-# Access Level 2: Specific sa from authorized ip addresses
-# ---------------------------------------------------------
+# --------------------------------------------------------------------
+# Access Level 2: Specific sa from authorized/restricted ip addresses
+# --------------------------------------------------------------------
 # Allow access to high-priv sa from authorized (restricted) ip addresses
 resource "google_access_context_manager_access_level" "hpriv_sa_from_ip" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
