@@ -1,34 +1,34 @@
-# ----------------------------------------
-# Variable Definitions (variables.tf)
-# ----------------------------------------
+# --------------------
+# Variable Definitions
+# --------------------
 variable "region" {
   description = "The GCP region for the provider."
   type        = string
-  default     = "me-west1"
+  default     = ""
 }
 
 variable "organization_id" {
   description = "The ID of the Google Cloud Organization."
   type        = string
-  default     = "323910511922"
+  default     = ""
 }
 
 variable "provider_project_id" {
   description = "The GCP project ID for the provider's operational context. This project is used for API calls and state management."
   type        = string
-  default     = "my-project-76851-371010"
+  default     = ""
 }
 
 variable "folder_id" {
   description = "The ID of the folder to be protected (scoped) by the perimeter."
   type        = string
-  default     = "12476811698"
+  default     = ""
 }
 
 variable "project_id" {
   description = "The ID of the project to be protected (scoped) by the perimeter."
   type        = string
-  default     = "1022605794612"
+  default     = ""
 }
 
 variable "policy_title" {
@@ -49,12 +49,6 @@ variable "restricted_services" {
   default     = []
 }
 
-# variable "ip_subnetworks" {
-#  description = "A list of IP CIDR ranges to allow access from."
-#  type        = list(string)
-#  default     = []
-#}
-
  variable "allowed_cidr" {
   description = "A list of IP CIDR ranges to allow access from."
   type        = list(string)
@@ -70,5 +64,5 @@ variable "restricted_services" {
 variable "privileged_service_accounts" {
   description = "The service accounts considered to have high privileges."
   type        = string
-  default     = "serviceAccount:sa1test@p-prd-app1.iam.gserviceaccount.com"
+  default     = ""
 }
