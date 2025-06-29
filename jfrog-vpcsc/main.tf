@@ -45,9 +45,9 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
   ]
 }
 
-# ------------------------------------------------------------------------------
-# Access Level 1: Any identity (except high-priv) from a specific ip addresses
-# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------
+# Access Level 1: Any identity (EXCEPT high-priv sa) from a specific ip addresses
+# --------------------------------------------------------------------------------
 resource "google_access_context_manager_access_level" "any_idnt_except_hpriv_from_ip" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
   name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/accessLevels/anyIdntExceptHprivSaFromIp"
