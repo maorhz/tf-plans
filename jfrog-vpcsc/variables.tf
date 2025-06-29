@@ -34,13 +34,19 @@ variable "project_id" {
 variable "policy_title" {
   description = "The title of the Access Context Manager Policy."
   type        = string
-  default     = "POLICY_B"
+  default     = ""
+}
+
+variable "perimeter_title" {
+  description = "The title of the Access Context Manager Policy."
+  type        = string
+  default     = ""
 }
 
 variable "restricted_services" {
   description = "A list of services to be protected by the perimeter."
   type        = list(string)
-  default     = ["storage.googleapis.com"]
+  default     = []
 }
 
 # variable "ip_subnetworks" {
@@ -55,8 +61,8 @@ variable "restricted_services" {
   default     = []
 }
 
- variable "restricted_cidr" {
-  description = "A list of restricted IP CIDR ranges."
+ variable "limitted_cidr" {
+  description = "A list of IP CIDR ranges for limitted use."
   type        = list(string)
   default     = []
 }
