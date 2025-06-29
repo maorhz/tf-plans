@@ -60,7 +60,7 @@ resource "google_access_context_manager_access_level" "any_idnt_except_hpriv_fro
     }
     conditions {
       negate  = true
-      members = [var.privileged_service_accounts]
+      members = var.hpriv_principal
     }
   }
 }
@@ -76,7 +76,10 @@ resource "google_access_context_manager_access_level" "hpriv_sa_from_ip" {
   basic {
     conditions {
       ip_subnetworks = var.limitted_cidr
-      members = [var.privileged_service_accounts]
+      members = var.hpriv_principal
     }
   }
+  depends_on = [
+    google_access_context_manager_access_level.any_idnt_except_hpriv_from_ip,
+  ]
 }
