@@ -23,7 +23,7 @@ resource "google_access_context_manager_access_policy" "access_policy" {
 # ------------------------------------------------------------------------------
 resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
-  name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/servicePerimeters/prmt_jfrog"
+  name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/servicePerimeters/pmtr_a"
   title  = var.perimeter_title
 
   perimeter_type = "PERIMETER_TYPE_REGULAR"
