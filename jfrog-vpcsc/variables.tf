@@ -38,7 +38,7 @@ variable "policy_title" {
 }
 
 variable "perimeter_title" {
-  description = "The title of the Access Context Manager Policy."
+  description = "The title of the VPC Service Controls perimeter."
   type        = string
   default     = ""
 }
@@ -50,13 +50,13 @@ variable "restricted_services" {
 }
 
  variable "allowed_cidr" {
-  description = "A list of IP CIDR ranges to allow access from."
+  description = "A list of IP CIDR range/s to allow access from."
   type        = list(string)
   default     = []
 }
 
  variable "limitted_cidr" {
-  description = "A list of IP CIDR ranges for limitted use."
+  description = "A list of limitted IP CIDR range/s to allow access from."
   type        = list(string)
   default     = []
 }
