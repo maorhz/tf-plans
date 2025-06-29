@@ -29,9 +29,8 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
   perimeter_type = "PERIMETER_TYPE_REGULAR"
 
   status {
-  # Projects to protect (included in the perimeter).
+  # Scoping (projects and services to included in the perimeter).
     resources = ["projects/${var.project_id}"]
-  # Services to protect (included in the perimeter).
     restricted_services = var.restricted_services
 
     access_levels = [
@@ -69,7 +68,6 @@ resource "google_access_context_manager_access_level" "any_sa_except_hpriv_from_
 # ----------------------------------------------------------------------------
 # Access Level 2: Specific sa from authorized/limittedted ip addresses
 # ----------------------------------------------------------------------------
-# Allow access to high-priv sa from authorized (limitted) ip addresses
 resource "google_access_context_manager_access_level" "hpriv_sa_from_ip" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
   name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/accessLevels/hprivSaFromIp"
