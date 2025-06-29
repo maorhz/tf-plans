@@ -1,2 +1,15 @@
+# Terraform state files
+# These files contain sensitive information and should not be committed.
+*.tfstate
+*.tfstate.backup
+
+# Local Terraform configuration files
+# These are generated locally and should not be committed.
+.terraform/
+.terraform.lock.hcl
+
+# Crash log files
+crash.log
+
 .terraform/
 .DS_Store
