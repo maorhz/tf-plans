@@ -34,13 +34,13 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
     restricted_services = var.restricted_services
 
     access_levels = [
-      google_access_context_manager_access_level.any_sa_except_hpriv_from_ip.name,
+      google_access_context_manager_access_level.any_idnt_except_hpriv_from_ip.name,
       google_access_context_manager_access_level.hpriv_sa_from_ip.name,
     ]
   }
   
   depends_on = [
-    google_access_context_manager_access_level.any_sa_except_hpriv_from_ip,
+    google_access_context_manager_access_level.any_idnt_except_hpriv_from_ip,
     google_access_context_manager_access_level.hpriv_sa_from_ip,
   ]
 }
@@ -48,7 +48,7 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
 # ------------------------------------------------------------------------------
 # Access Level 1: Any identity (except high-priv) from a specific ip addresses
 # ------------------------------------------------------------------------------
-resource "google_access_context_manager_access_level" "any_sa_except_hpriv_from_ip" {
+resource "google_access_context_manager_access_level" "any_idnt_except_hpriv_from_ip" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
   name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/accessLevels/anySaExceptHprivFromIp"
   title  = "Any identity except from high-priv sa"
