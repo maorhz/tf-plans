@@ -9,6 +9,6 @@ project_id                  = "1022605794612"                       # scoped pro
 policy_title                = "ACM_POLICY"
 perimeter_title             = "prmtr_a"
 restricted_services         = ["storage.googleapis.com"]
-limitted_cidr               = ["44.202.22.235/32"]                  # multpile values >> ["44.202.22.235/32", "93.173.47.135/32"]
+limitted_cidr               = ["44.202.22.235/32", "2620:0:1045:1f:4c94:ee6b:1bdc:9a65/128"]        # multpile values >> ["44.202.22.235/32", "2620:0:1045:1f:4c94:ee6b:1bdc:9a65/128"]
 allowed_cidr                = ["93.173.47.135/32"]
 privileged_service_accounts = "serviceAccount:sa1test@p-prd-app1.iam.gserviceaccount.com"
