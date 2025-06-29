@@ -50,7 +50,7 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
 # ------------------------------------------------------------------------------
 resource "google_access_context_manager_access_level" "any_idnt_except_hpriv_from_ip" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
-  name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/accessLevels/anySaExceptHprivFromIp"
+  name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/accessLevels/anyIdntExceptHprivFromIp"
   title  = "Any identity except from high-priv sa"
 
   basic {
@@ -76,9 +76,7 @@ resource "google_access_context_manager_access_level" "hpriv_sa_from_ip" {
   basic {
     conditions {
       ip_subnetworks = var.limitted_cidr
-      members = [
-        "serviceAccount:sa1test@p-prd-app1.iam.gserviceaccount.com"
-      ]
+      members = [var.privileged_service_accounts]
     }
   }
 }
