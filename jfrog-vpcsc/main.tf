@@ -12,7 +12,7 @@ provider "google" {
 # ------------------------------------------------------------------------------
 # Access Context Manager Policy
 # ------------------------------------------------------------------------------
-# Organization level policy (**required**)
+# Organization level policy (required to avoid unexpected behaviour)
 resource "google_access_context_manager_access_policy" "access_policy" {
   parent = "organizations/${var.organization_id}"
   title  = var.policy_title
