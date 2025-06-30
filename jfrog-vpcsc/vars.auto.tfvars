@@ -1,6 +1,6 @@
-# -------------------------------
-# Assigns values to the variables
-# -------------------------------
+# ------------------------
+# Variables assignment
+# ------------------------
 region                      = "me-west1"
 organization_id             = "323910511922"
 provider_project_id         = "my-project-76851-371010"
