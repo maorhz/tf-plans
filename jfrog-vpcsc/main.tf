@@ -29,7 +29,7 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
   perimeter_type = "PERIMETER_TYPE_REGULAR"
 
   status {
-  # Scoping (projects and services to included in the perimeter).
+  # Scoping of projects and services to included in the perimeter.
     resources = ["projects/${var.project_id}"]
     restricted_services = var.restricted_services
 
