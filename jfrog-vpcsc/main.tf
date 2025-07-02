@@ -66,7 +66,7 @@ resource "google_access_context_manager_access_level" "any_idnt_except_hpriv_fro
 }
 
 # ----------------------------------------------------------------------------
-# Access Level 2: Specific sa from authorized/limittedted ip addresses
+# Access Level 2: Specific sa from authorized/limitted ip addresses
 # ----------------------------------------------------------------------------
 resource "google_access_context_manager_access_level" "hpriv_sa_from_ip" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
