@@ -61,6 +61,12 @@ variable "restricted_services" {
   default     = []
 }
 
+variable "excld_principal" {
+  description = "The service accounts considered to have high privileges."
+  type        = list(string)
+  default     = []
+}
+
 variable "hpriv_principal" {
   description = "The service accounts considered to have high privileges."
   type        = list(string)

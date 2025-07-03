@@ -60,7 +60,7 @@ resource "google_access_context_manager_access_level" "any_idnt_except_hpriv_fro
     }
     conditions {
       negate  = true
-      members = var.hpriv_principal
+      members = var.excld_principal
     }
   }
 }
