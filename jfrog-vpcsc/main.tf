@@ -71,7 +71,7 @@ resource "google_access_context_manager_access_level" "any_idnt_except_hpriv_fro
 resource "google_access_context_manager_access_level" "hpriv_sa_from_ip" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
   name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/accessLevels/hprivSaFromIp"
-  title  = "High-priv sa from authoized (limited) ip addreses"
+  title  = "High-priv sa from authorized (limited) ip addreses"
   
   basic {
     conditions {
