@@ -55,7 +55,7 @@ variable "restricted_services" {
   default     = []
 }
 
- variable "limitted_cidr" {
+ variable "limited_cidr" {
   description = "A list of limitted IP CIDR range/s to allow access from."
   type        = list(string)
   default     = []

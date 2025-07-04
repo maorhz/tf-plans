@@ -66,16 +66,16 @@ resource "google_access_context_manager_access_level" "any_idnt_except_hpriv_fro
 }
 
 # ----------------------------------------------------------------------------
-# Access Level 2: Specific sa from authorized/limitted ip addresses
+# Access Level 2: Specific sa from authorized/limited ip addresses
 # ----------------------------------------------------------------------------
 resource "google_access_context_manager_access_level" "hpriv_sa_from_ip" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
   name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/accessLevels/hprivSaFromIp"
-  title  = "High-priv sa from authoized (limitted) ip addreses"
+  title  = "High-priv sa from authoized (limited) ip addreses"
   
   basic {
     conditions {
-      ip_subnetworks = var.limitted_cidr
+      ip_subnetworks = var.limited_cidr
       members = var.hpriv_principal
     }
   }
