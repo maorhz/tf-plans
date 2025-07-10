@@ -14,26 +14,21 @@
  * limitations under the License.
  */
 
-# ------------------------
-# Provider Configuration
-# ------------------------
+
+## Provider ##
 provider "google" {
   project = var.provider_project_id
   region  = var.region
 }
 
-# ------------------------------------------------------------------------------
-# Access Context Manager Policy
-# ------------------------------------------------------------------------------
+## Access Context Manager Policy ##
 # Org level policy (required to avoid unexpected behaviour)
 resource "google_access_context_manager_access_policy" "access_policy" {
   parent = "organizations/${var.organization_id}"
   title  = var.policy_title
 }
 
-# ------------------------------------------------------------------------------
-# Service Perimeter
-# ------------------------------------------------------------------------------
+## Service Perimeter ##
 resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
   name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/servicePerimeters/pmtr_a"
@@ -58,9 +53,8 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
   ]
 }
 
-# --------------------------------------------------------------------------------
-# Access Level 1: Any identity (EXCEPT high-priv sa) from a specific ip addresses
-# --------------------------------------------------------------------------------
+## Access Levels ## 
+# Acess Level 1: Any identity (EXCEPT high-priv sa) from a specific ip addresses
 resource "google_access_context_manager_access_level" "any_idnt_except_hpriv_from_ip" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
   name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/accessLevels/anyIdntExceptHprivSaFromIp"
@@ -78,9 +72,7 @@ resource "google_access_context_manager_access_level" "any_idnt_except_hpriv_fro
   }
 }
 
-# ----------------------------------------------------------------------------
 # Access Level 2: Specific sa from authorized/limited ip addresses
-# ----------------------------------------------------------------------------
 resource "google_access_context_manager_access_level" "hpriv_sa_from_ip" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
   name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/accessLevels/hprivSaFromIp"
