@@ -1,6 +1,4 @@
-# --------------------
-# Variable Definitions
-# --------------------
+# Variables definition
 variable "region" {
   description = "The GCP region for the provider."
   type        = string
