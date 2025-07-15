@@ -14,28 +14,21 @@
  * limitations under the License.
  */
 
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 5.0"
-    }
-  }
-}
 
+## Provider ##
 provider "google" {
   project = var.provider_project_id
   region  = var.region
 }
 
 ## Access Context Manager Policy ##
-#  Org level policy (required to avoid unexpected behaviour)
+# Org level policy (required to avoid unexpected behaviour)
 resource "google_access_context_manager_access_policy" "access_policy" {
   parent = "organizations/${var.organization_id}"
   title  = var.policy_title
 }
 
-## Service Perimeter (Dry-Run) ##
+## Service Perimeter ##
 resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
   name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/servicePerimeters/pmtr_a"
@@ -43,15 +36,9 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
 
   perimeter_type = "PERIMETER_TYPE_REGULAR"
 
-# Enforced mode (blank with dry-run mode)
   status {
-    resources = []
-  }
-  
-# Dry-run mode
-  use_explicit_dry_run_spec = true
-  spec {
-    resources           = ["projects/${var.project_id}"]
+  # Scoping of projects and services to be included in the perimeter.
+    resources = ["projects/${var.project_id}"]
     restricted_services = var.restricted_services
 
     access_levels = [
@@ -59,7 +46,7 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
       google_access_context_manager_access_level.hpriv_sa_from_ip.name,
     ]
   }
-
+  
   depends_on = [
     google_access_context_manager_access_level.any_idnt_except_hpriv_from_ip,
     google_access_context_manager_access_level.hpriv_sa_from_ip,
@@ -74,10 +61,10 @@ resource "google_access_context_manager_access_level" "any_idnt_except_hpriv_fro
   title  = "Any identity except from high-priv sa"
 
   basic {
-    #    combining_function = "AND"
-    #   conditions {
-    #      ip_subnetworks = var.allowed_cidr
-    #    }
+#    combining_function = "AND"
+#   conditions {
+#      ip_subnetworks = var.allowed_cidr
+#    }
     conditions {
       negate  = true
       members = var.excld_principal
@@ -90,11 +77,11 @@ resource "google_access_context_manager_access_level" "hpriv_sa_from_ip" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
   name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/accessLevels/hprivSaFromIp"
   title  = "High-priv sa from authorized (limited) ip addreses"
-
+  
   basic {
     conditions {
       ip_subnetworks = var.limited_cidr
-      members        = var.hpriv_principal
+      members = var.hpriv_principal
     }
   }
   depends_on = [
