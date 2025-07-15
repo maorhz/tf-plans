@@ -70,7 +70,7 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
 # Acess Level 1: Any identity EXCEPT from high-priv sa (optiona - from specific ip addresses)
 resource "google_access_context_manager_access_level" "any_idnt_except_hpriv" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
-  name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/accessLevels/anyIdntExceptHprivSaFromIp"
+  name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/accessLevels/anyIdntExceptHprivSa"
   title  = "Any identity except from high-priv sa"
 
   basic {
