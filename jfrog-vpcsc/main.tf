@@ -43,7 +43,7 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
 
   perimeter_type = "PERIMETER_TYPE_REGULAR"
 
-# Enforced mode (blank when using dry-run mode)
+# Enforce mode (blank when using dry-run mode)
   status {
     resources = []
   }
