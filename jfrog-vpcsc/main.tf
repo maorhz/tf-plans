@@ -55,29 +55,29 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
     restricted_services = var.restricted_services
 
     access_levels = [
-      google_access_context_manager_access_level.any_idnt_except_hpriv_from_ip.name,
+      google_access_context_manager_access_level.any_idnt_except_hpriv.name,
       google_access_context_manager_access_level.hpriv_sa_from_ip.name,
     ]
   }
 
   depends_on = [
-    google_access_context_manager_access_level.any_idnt_except_hpriv_from_ip,
+    google_access_context_manager_access_level.any_idnt_except_hpriv,
     google_access_context_manager_access_level.hpriv_sa_from_ip,
   ]
 }
 
 ## Access Levels ## 
-# Acess Level 1: Any identity (EXCEPT high-priv sa) from a specific ip addresses
-resource "google_access_context_manager_access_level" "any_idnt_except_hpriv_from_ip" {
+# Acess Level 1: Any identity EXCEPT from high-priv sa (optiona - from specific ip addresses)
+resource "google_access_context_manager_access_level" "any_idnt_except_hpriv" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
   name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/accessLevels/anyIdntExceptHprivSaFromIp"
   title  = "Any identity except from high-priv sa"
 
   basic {
-    #    combining_function = "AND"
-    #   conditions {
-    #      ip_subnetworks = var.allowed_cidr
-    #    }
+#      combining_function = "AND"
+#      conditions {
+#      ip_subnetworks = var.allowed_cidr
+#    }
     conditions {
       negate  = true
       members = var.excld_principal
@@ -98,6 +98,6 @@ resource "google_access_context_manager_access_level" "hpriv_sa_from_ip" {
     }
   }
   depends_on = [
-    google_access_context_manager_access_level.any_idnt_except_hpriv_from_ip,
+    google_access_context_manager_access_level.any_idnt_except_hpriv,
   ]
 }
