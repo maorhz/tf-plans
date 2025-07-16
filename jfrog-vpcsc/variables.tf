@@ -54,13 +54,13 @@ variable "restricted_services" {
 }
 
  variable "limited_cidr" {
-  description = "A list of limitted IP CIDR range/s to allow access from."
+  description = "A list of limited IP CIDR range/s to allow access from."
   type        = list(string)
   default     = []
 }
 
 variable "excld_principal" {
-  description = "The service accounts considered to have high privileges."
+  description = "Identities to allow access to protected resources inside the perimeter."
   type        = list(string)
   default     = []
 }

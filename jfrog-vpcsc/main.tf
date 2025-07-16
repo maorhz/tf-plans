@@ -97,7 +97,4 @@ resource "google_access_context_manager_access_level" "hpriv_sa_from_ip" {
       members        = var.hpriv_principal
     }
   }
-  depends_on = [
-    google_access_context_manager_access_level.any_idnt_except_hpriv,
-  ]
 }
