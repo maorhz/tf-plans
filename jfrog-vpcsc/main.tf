@@ -48,7 +48,7 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
     resources = []
   }
   
-# Dry-run mode
+# Dry-run mode (comment/remove when enforce mode)
   use_explicit_dry_run_spec = true
   spec {
     resources           = ["projects/${var.project_id}"]
