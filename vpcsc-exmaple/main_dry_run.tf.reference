@@ -37,7 +37,7 @@ resource "google_access_context_manager_access_policy" "access_policy" {
   title  = var.policy_title
 }
 
-## Service Perimeter (Enforced) ##
+## Service Perimeter (Dry-Run) ##
 resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
   name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/servicePerimeters/pmtr_a"
@@ -45,8 +45,14 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
 
   perimeter_type = "PERIMETER_TYPE_REGULAR"
 
-# Enforce mode (populated)
+# Enforce mode (blank when using dry-run mode)
   status {
+    resources = []
+  }
+  
+# Dry-run mode active
+  use_explicit_dry_run_spec = true
+  spec {
     resources           = ["projects/${var.project_id}"]
     restricted_services = var.restricted_services
 
@@ -55,9 +61,6 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
       google_access_context_manager_access_level.hpriv_sa_from_ip.name,
     ]
   }
-  
-# Dry-run mode disabled
-  use_explicit_dry_run_spec = false
 
   depends_on = [
     google_access_context_manager_access_level.any_idnt_except_hpriv,
@@ -66,7 +69,7 @@ resource "google_access_context_manager_service_perimeter" "jfrog_perimeter" {
 }
 
 ## Access Levels ## 
-# Acess Level 1: Any identity EXCEPT from high-priv sa (optiona - from specific ip addresses)
+# Acess Level 1: Any identity EXCEPT from high-priv sa (optional - from specific ip addresses)
 resource "google_access_context_manager_access_level" "any_idnt_except_hpriv" {
   parent = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}"
   name   = "accessPolicies/${google_access_context_manager_access_policy.access_policy.name}/accessLevels/anyIdntExceptHprivSa"
